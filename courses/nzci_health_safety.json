@@ -1,0 +1,54 @@
+{
+  "id": "nzci_health_safety",
+  "name": "NZCI Health and Safety Excellence",
+  "description": "Comprehensive health and safety program for construction professionals",
+  "duration_weeks": 8,
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "module_1",
+      "title": "Health and Safety Legislation",
+      "description": "Understanding HSWA 2015 and NZ safety frameworks",
+      "lessons": [
+        {"id": "lesson_1_1", "title": "HSWA 2015", "content": "Hierarchy of duties and PCBU obligations"},
+        {"id": "lesson_1_2", "title": "WorkSafe NZ", "content": "Compliance framework and enforcement"},
+        {"id": "lesson_1_3", "title": "Due Diligence", "content": "Director and officer responsibilities"}
+      ]
+    },
+    {
+      "id": "module_2",
+      "title": "Hazard Management",
+      "description": "Identifying and controlling construction hazards",
+      "lessons": [
+        {"id": "lesson_2_1", "title": "Common Hazards", "content": "Falls, electrical, excavation hazards"},
+        {"id": "lesson_2_2", "title": "Hazard Elimination", "content": "Hierarchy of controls"},
+        {"id": "lesson_2_3", "title": "Safe Work Method", "content": "SWMS development and toolbox talks"}
+      ]
+    },
+    {
+      "id": "module_3",
+      "title": "Incident Management",
+      "description": "Responding to and learning from workplace incidents",
+      "lessons": [
+        {"id": "lesson_3_1", "title": "Incident Reporting", "content": "Notifiable event criteria"},
+        {"id": "lesson_3_2", "title": "Root Cause Analysis", "content": "Investigation techniques"},
+        {"id": "lesson_3_3", "title": "Corrective Actions", "content": "CAPA development"}
+      ]
+    },
+    {
+      "id": "module_4",
+      "title": "Psychological Health",
+      "description": "Mental health support and psychosocial risk management",
+      "lessons": [
+        {"id": "lesson_4_1", "title": "Psychosocial Hazards", "content": "Stress and fatigue management"},
+        {"id": "lesson_4_2", "title": "Mental Health Support", "content": "EAP programs and peer support"},
+        {"id": "lesson_4_3", "title": "Safety Culture", "content": "Leadership and engagement"}
+      ]
+    }
+  ],
+  "assessments": [
+    {"id": "assessment_1", "type": "quiz", "module": "module_1", "title": "HSWA 2015 Fundamentals", "passing_score": 80},
+    {"id": "assessment_2", "type": "practical", "module": "module_2", "title": "Hazard Assessment"},
+    {"id": "assessment_3", "type": "case_study", "module": "module_3", "title": "Incident Investigation"}
+  ]
+}

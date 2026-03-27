@@ -1,0 +1,64 @@
+{
+  "id": "nzci_flexi",
+  "name": "NZCI Flexitime Construction",
+  "description": "Flexible construction training program covering core civil engineering principles",
+  "duration_weeks": 12,
+  "level": "beginner",
+  "modules": [
+    {
+      "id": "module_1",
+      "title": "Introduction to Civil Engineering",
+      "description": "Fundamentals of civil engineering practice in New Zealand",
+      "lessons": [
+        {"id": "lesson_1_1", "title": "History and Role of Civil Engineering", "content": "Overview of civil engineering discipline"},
+        {"id": "lesson_1_2", "title": "NZ Building Standards", "content": "Understanding NZ Building Code"},
+        {"id": "lesson_1_3", "title": "Sustainable Construction", "content": "Environmental considerations"}
+      ]
+    },
+    {
+      "id": "module_2",
+      "title": "Site Safety and Risk Management",
+      "description": "Essential safety protocols",
+      "lessons": [
+        {"id": "lesson_2_1", "title": "PCBU Responsibilities", "content": "Person Conducting a Business or Undertaking obligations"},
+        {"id": "lesson_2_2", "title": "Hazard Control", "content": "HIRAC process for identifying hazards"},
+        {"id": "lesson_2_3", "title": "Emergency Response", "content": "Emergency planning and first aid"}
+      ]
+    },
+    {
+      "id": "module_3",
+      "title": "Foundation Engineering",
+      "description": "Soil mechanics and foundation design",
+      "lessons": [
+        {"id": "lesson_3_1", "title": "Soil Classification", "content": "Understanding soil types and properties"},
+        {"id": "lesson_3_2", "title": "Foundation Types", "content": "Shallow and deep foundation design"},
+        {"id": "lesson_3_3", "title": "Geotechnical Investigations", "content": "Site investigation procedures"}
+      ]
+    },
+    {
+      "id": "module_4",
+      "title": "Structural Design",
+      "description": "Structural analysis and design principles",
+      "lessons": [
+        {"id": "lesson_4_1", "title": "Load Types", "content": "Dead, live, wind and seismic loads"},
+        {"id": "lesson_4_2", "title": "Reinforced Concrete", "content": "Concrete properties and reinforcement"},
+        {"id": "lesson_4_3", "title": "Steel Construction", "content": "Steel properties and connection design"}
+      ]
+    },
+    {
+      "id": "module_5",
+      "title": "Project Management",
+      "description": "Planning, scheduling and cost management",
+      "lessons": [
+        {"id": "lesson_5_1", "title": "Project Planning", "content": "WBS, Gantt charts, critical path analysis"},
+        {"id": "lesson_5_2", "title": "Cost Estimation", "content": "Budget development and tracking"},
+        {"id": "lesson_5_3", "title": "Quality Management", "content": "Quality assurance and testing"}
+      ]
+    }
+  ],
+  "assessments": [
+    {"id": "assessment_1", "type": "quiz", "module": "module_1", "title": "Civil Engineering Fundamentals", "passing_score": 70},
+    {"id": "assessment_2", "type": "practical", "module": "module_2", "title": "Site Safety Inspection"},
+    {"id": "assessment_3", "type": "case_study", "module": "module_5", "title": "Construction Project Analysis"}
+  ]
+}

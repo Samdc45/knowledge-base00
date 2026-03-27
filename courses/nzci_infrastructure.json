@@ -1,0 +1,54 @@
+{
+  "id": "nzci_infrastructure",
+  "name": "NZCI Infrastructure and Transportation",
+  "description": "Specialized program focusing on roads, bridges, and transport systems",
+  "duration_weeks": 14,
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "module_1",
+      "title": "Road Design and Standards",
+      "description": "NZ road design standards and geometric design",
+      "lessons": [
+        {"id": "lesson_1_1", "title": "NZ Road Standards", "content": "NZTA standards and Austroads guides"},
+        {"id": "lesson_1_2", "title": "Geometric Design", "content": "Alignment and sight distance"},
+        {"id": "lesson_1_3", "title": "Traffic Engineering", "content": "Volume analysis and intersection design"}
+      ]
+    },
+    {
+      "id": "module_2",
+      "title": "Bridge Engineering",
+      "description": "Bridge design, construction, and maintenance",
+      "lessons": [
+        {"id": "lesson_2_1", "title": "Bridge Types", "content": "Beam, arch, suspension bridges"},
+        {"id": "lesson_2_2", "title": "Bridge Loading", "content": "Vehicle and environmental loads"},
+        {"id": "lesson_2_3", "title": "Bridge Inspection", "content": "Maintenance and rehabilitation"}
+      ]
+    },
+    {
+      "id": "module_3",
+      "title": "Pavement Engineering",
+      "description": "Pavement design and lifecycle management",
+      "lessons": [
+        {"id": "lesson_3_1", "title": "Flexible Pavement", "content": "Bituminous pavements and design"},
+        {"id": "lesson_3_2", "title": "Rigid Pavement", "content": "Concrete pavements and alternatives"},
+        {"id": "lesson_3_3", "title": "Lifecycle Management", "content": "Maintenance and rehabilitation timing"}
+      ]
+    },
+    {
+      "id": "module_4",
+      "title": "Public Transport Systems",
+      "description": "Planning and design of sustainable transport",
+      "lessons": [
+        {"id": "lesson_4_1", "title": "Transit Oriented Development", "content": "Integration of transport and land use"},
+        {"id": "lesson_4_2", "title": "Active Transport", "content": "Cycling and pedestrian infrastructure"},
+        {"id": "lesson_4_3", "title": "Smart Mobility", "content": "Intelligent transport systems"}
+      ]
+    }
+  ],
+  "assessments": [
+    {"id": "assessment_1", "type": "design_project", "module": "module_1", "title": "Road Design Exercise", "passing_score": 70},
+    {"id": "assessment_2", "type": "case_study", "module": "module_2", "title": "Bridge Assessment"},
+    {"id": "assessment_3", "type": "practical", "module": "module_3", "title": "Pavement Evaluation"}
+  ]
+}

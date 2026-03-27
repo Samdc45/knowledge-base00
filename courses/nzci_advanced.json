@@ -1,0 +1,64 @@
+{
+  "id": "nzci_advanced",
+  "name": "NZCI Advanced Construction Management",
+  "description": "Advanced program for experienced construction professionals",
+  "duration_weeks": 16,
+  "level": "advanced",
+  "modules": [
+    {
+      "id": "module_1",
+      "title": "Advanced Project Delivery",
+      "description": "Design-Build, PPP, and integrated project delivery",
+      "lessons": [
+        {"id": "lesson_1_1", "title": "Design-Build Contracts", "content": "Structure and risk allocation"},
+        {"id": "lesson_1_2", "title": "Public-Private Partnerships", "content": "PPP frameworks and governance"},
+        {"id": "lesson_1_3", "title": "Integrated Project Teams", "content": "Collaborative delivery and lean construction"}
+      ]
+    },
+    {
+      "id": "module_2",
+      "title": "Advanced Risk Management",
+      "description": "Enterprise risk management for major projects",
+      "lessons": [
+        {"id": "lesson_2_1", "title": "Risk Assessment", "content": "Qualitative and quantitative analysis"},
+        {"id": "lesson_2_2", "title": "Risk Allocation", "content": "Risk transfer and insurance strategies"},
+        {"id": "lesson_2_3", "title": "Stakeholder Management", "content": "Community engagement"}
+      ]
+    },
+    {
+      "id": "module_3",
+      "title": "Digital Transformation",
+      "description": "BIM, AI, and emerging technologies",
+      "lessons": [
+        {"id": "lesson_3_1", "title": "Building Information Modeling", "content": "BIM workflows and standards"},
+        {"id": "lesson_3_2", "title": "Data Analytics", "content": "Predictive analytics and machine learning"},
+        {"id": "lesson_3_3", "title": "Cloud Technologies", "content": "Real-time monitoring and collaboration"}
+      ]
+    },
+    {
+      "id": "module_4",
+      "title": "Infrastructure Sustainability",
+      "description": "Sustainable design and green infrastructure",
+      "lessons": [
+        {"id": "lesson_4_1", "title": "Lifecycle Assessment", "content": "Environmental impact assessment"},
+        {"id": "lesson_4_2", "title": "Green Infrastructure", "content": "LEED and green certifications"},
+        {"id": "lesson_4_3", "title": "Climate Resilience", "content": "Adapting for climate change"}
+      ]
+    },
+    {
+      "id": "module_5",
+      "title": "Financial Management",
+      "description": "Complex project financing and value management",
+      "lessons": [
+        {"id": "lesson_5_1", "title": "Project Finance", "content": "Funding structures and forecasting"},
+        {"id": "lesson_5_2", "title": "Value Engineering", "content": "Cost optimization"},
+        {"id": "lesson_5_3", "title": "Economic Impact", "content": "Cost-benefit and ROI analysis"}
+      ]
+    }
+  ],
+  "assessments": [
+    {"id": "assessment_1", "type": "case_study", "module": "module_1", "title": "Design-Build Project Analysis", "passing_score": 75},
+    {"id": "assessment_2", "type": "practical", "module": "module_2", "title": "Risk Register Development"},
+    {"id": "assessment_3", "type": "research_project", "module": "module_4", "title": "Sustainability Report"}
+  ]
+}

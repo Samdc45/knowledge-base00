@@ -1,0 +1,11 @@
+.git
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.local
+.DS_Store
+venv/
+.vscode/
+.idea/
+*.swp
