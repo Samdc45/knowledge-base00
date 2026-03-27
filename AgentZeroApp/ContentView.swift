@@ -3,17 +3,27 @@ import SwiftUI
 @main
 struct AgentZeroApp: App {
     @StateObject private var client = AgentZeroClient()
+    @StateObject private var auth = AuthenticationService()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(client)
+            if auth.isAuthenticated {
+                ContentView()
+                    .environmentObject(client)
+                    .environmentObject(auth)
+            } else {
+                LoginView()
+                    .environmentObject(auth)
+            }
         }
     }
 }
 
+// MARK: - Main Content View
+
 struct ContentView: View {
     @EnvironmentObject var client: AgentZeroClient
+    @EnvironmentObject var auth: AuthenticationService
     @State private var selectedTab = 0
     
     var body: some View {
@@ -53,21 +63,31 @@ struct ContentView: View {
 
 struct TaskRouterView: View {
     @EnvironmentObject var client: AgentZeroClient
+    @EnvironmentObject var auth: AuthenticationService
     @State private var taskInput = ""
     @State private var priority = 1
-    @State private var showResponse = false
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                // Header
+                // Header with User Info
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Agent Zero Router")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Route tasks to optimal subagents")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Agent Zero Router")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            if let user = auth.currentUser {
+                                Text("Welcome, \(user.name)")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        Spacer()
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -84,7 +104,6 @@ struct TaskRouterView: View {
                         .padding(8)
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
-                        .lineLimit(4)
                 }
                 
                 // Priority Selector
@@ -110,7 +129,6 @@ struct TaskRouterView: View {
                 Button(action: {
                     Task {
                         await client.routeTask(task: taskInput, priority: priority)
-                        showResponse = true
                     }
                 }) {
                     HStack {
@@ -125,57 +143,10 @@ struct TaskRouterView: View {
                     .cornerRadius(8)
                 }
                 .disabled(taskInput.isEmpty || client.isLoading)
-                .opacity(taskInput.isEmpty || client.isLoading ? 0.6 : 1.0)
                 
                 // Response Card
                 if let response = client.lastResponse {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemImage: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                            Text("Response")
-                                .fontWeight(.bold)
-                            Spacer()
-                            Text(response.status)
-                                .font(.caption)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.green.opacity(0.2))
-                                .cornerRadius(4)
-                        }
-                        
-                        Divider()
-                        
-                        if let subagents = response.subagent_names {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Subagents Used: \(response.subagents_used ?? 0)")
-                                    .font(.caption)
-                                    .fontWeight(.bold)
-                                VStack(alignment: .leading) {
-                                    ForEach(subagents, id: \.self) { agent in
-                                        HStack {
-                                            Image(systemName: "circle.fill")
-                                                .font(.system(size: 6))
-                                            Text(agent)
-                                                .font(.caption)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        if let aggregated = response.aggregated_result {
-                            Divider()
-                            HStack(spacing: 12) {
-                                StatCard(label: "Processed", value: "\(aggregated.total_processed ?? 0)")
-                                StatCard(label: "Insights", value: "\(aggregated.insights_generated ?? 0)")
-                                StatCard(label: "Predictions", value: "\(aggregated.predictions_made ?? 0)")
-                            }
-                        }
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    ResponseCard(response: response)
                 }
                 
                 // Error Message
@@ -199,6 +170,62 @@ struct TaskRouterView: View {
     }
 }
 
+// MARK: - Response Card Component
+
+struct ResponseCard: View {
+    let response: AgentZeroClient.TaskResponse
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+                Text("Response")
+                    .fontWeight(.bold)
+                Spacer()
+                Text(response.status)
+                    .font(.caption)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.green.opacity(0.2))
+                    .cornerRadius(4)
+            }
+            
+            Divider()
+            
+            if let subagents = response.subagent_names {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Subagents Used: \(response.subagents_used ?? 0)")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                    VStack(alignment: .leading) {
+                        ForEach(subagents, id: \.self) { agent in
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .font(.system(size: 6))
+                                Text(agent)
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if let aggregated = response.aggregated_result {
+                Divider()
+                HStack(spacing: 12) {
+                    StatCard(label: "Processed", value: "\(aggregated.total_processed ?? 0)")
+                    StatCard(label: "Insights", value: "\(aggregated.insights_generated ?? 0)")
+                    StatCard(label: "Predictions", value: "\(aggregated.predictions_made ?? 0)")
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(12)
+    }
+}
+
 // MARK: - Status View
 
 struct StatusView: View {
@@ -209,7 +236,6 @@ struct StatusView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                // Refresh Button
                 Button(action: {
                     Task {
                         isLoading = true
@@ -232,7 +258,6 @@ struct StatusView: View {
                 if let status = status {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            // Entry Point Info
                             InfoCard(title: "Entry Point", items: [
                                 ("Service", status.entry_point),
                                 ("Version", status.version),
@@ -240,7 +265,6 @@ struct StatusView: View {
                                 ("Fallback", status.fallback_enabled ? "Enabled" : "Disabled")
                             ])
                             
-                            // Agents Status
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Agents")
                                     .font(.headline)
@@ -255,7 +279,6 @@ struct StatusView: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(12)
                             
-                            // Stats Summary
                             InfoCard(title: "Stats", items: [
                                 ("Total Requests", "\(status.stats.total_requests)"),
                                 ("Primary Success", "\(status.stats.python_primary)"),
@@ -378,20 +401,44 @@ struct StatsView: View {
 // MARK: - Settings View
 
 struct SettingsView: View {
-    @EnvironmentObject var client: AgentZeroClient
+    @EnvironmentObject var auth: AuthenticationService
     @State private var baseURL = "http://localhost:7777"
     @AppStorage("agentZeroURL") var savedURL = "http://localhost:7777"
     
     var body: some View {
         NavigationStack {
             Form {
+                Section("User Profile") {
+                    if let user = auth.currentUser {
+                        HStack {
+                            Text("Name")
+                            Spacer()
+                            Text(user.name)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("Email")
+                            Spacer()
+                            Text(user.email)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack {
+                            Text("Role")
+                            Spacer()
+                            Text(user.role)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                
                 Section("API Configuration") {
                     TextField("Base URL", text: $baseURL)
                         .textInputAutocapitalization(.never)
                     
                     Button(action: {
                         savedURL = baseURL
-                        // Reinitialize client with new URL
                     }) {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
@@ -410,13 +457,6 @@ struct SettingsView: View {
                     }
                     
                     HStack {
-                        Text("Build")
-                        Spacer()
-                        Text("1")
-                            .foregroundColor(.gray)
-                    }
-                    
-                    HStack {
                         Text("Entry Point")
                         Spacer()
                         Text("v1.3-hybrid")
@@ -424,10 +464,16 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("Quick Links") {
-                    Link("Entry Point API", destination: URL(string: baseURL + "/entry/status") ?? URL(fileURLWithPath: ""))
-                    Link("Docker v1.3 UI", destination: URL(string: "http://localhost:55015") ?? URL(fileURLWithPath: ""))
-                    Link("LMS Service", destination: URL(string: "http://localhost:6000") ?? URL(fileURLWithPath: ""))
+                Section {
+                    Button(role: .destructive, action: {
+                        auth.logout()
+                    }) {
+                        HStack {
+                            Image(systemName: "icloud.and.arrow.up")
+                            Text("Sign Out")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    }
                 }
             }
             .navigationTitle("Settings")
@@ -543,4 +589,5 @@ struct Badge: View {
 #Preview {
     ContentView()
         .environmentObject(AgentZeroClient())
+        .environmentObject(AuthenticationService())
 }
