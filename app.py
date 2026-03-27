@@ -41,6 +41,10 @@ def require_api_key(f):
 def health():
     return jsonify({'status': 'healthy', 'service': 'south-lms'}), 200
 
+@app.route('/api/health', methods=['GET'])
+def api_health():
+    return jsonify({'status': 'healthy', 'service': 'south-lms', 'courses_loaded': len(courses_cache)}), 200
+
 @app.route('/api/courses', methods=['GET'])
 @require_api_key
 def get_courses():

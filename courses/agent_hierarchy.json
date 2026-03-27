@@ -1,0 +1,297 @@
+{
+  "id": "agent_hierarchy",
+  "name": "Agent Zero Hierarchy & Task Assignments",
+  "description": "Complete organizational structure with Agent Zero and 5 subagents",
+  "duration_weeks": 1,
+  "level": "organization",
+  "modules": [
+    {
+      "id": "hierarchy_structure",
+      "title": "Organizational Hierarchy",
+      "description": "Agent Zero Master with 5 Subagents",
+      "lessons": [
+        {
+          "id": "agent_zero_role",
+          "title": "Agent Zero - Master Orchestrator",
+          "content": "Master controller for all operations. Routes tasks, coordinates execution, aggregates results. Runs on port 55015."
+        },
+        {
+          "id": "subagent_1_role",
+          "title": "Subagent 1 - Learning Management (south-lms:6000)",
+          "content": "Manages training courses, NZCI content, learning paths. Handles course queries, enrollment, progress tracking."
+        },
+        {
+          "id": "subagent_2_role",
+          "title": "Subagent 2 - API Gateway (161:80)",
+          "content": "Request routing, API coordination, load balancing between services. Central integration point."
+        },
+        {
+          "id": "subagent_3_role",
+          "title": "Subagent 3 - Data Processor (unruffled_buck:80)",
+          "content": "ETL operations, data transformation, validation, format conversion, data cleaning."
+        },
+        {
+          "id": "subagent_4_role",
+          "title": "Subagent 4 - Analysis Service (ecstatic_mirzakhani:80)",
+          "content": "Data analysis, reporting, metrics generation, dashboard creation, insights extraction."
+        },
+        {
+          "id": "subagent_5_role",
+          "title": "Subagent 5 - ML/AI Service (magical_chaplygin:80)",
+          "content": "Machine learning models, predictions, NLP processing, AI recommendations, pattern detection."
+        }
+      ]
+    },
+    {
+      "id": "task_assignment_levels",
+      "title": "Task Assignment Hierarchy Levels",
+      "description": "Priority-based task routing and execution",
+      "lessons": [
+        {
+          "id": "level_1_critical",
+          "title": "Level 1 - Critical (Agent Zero Only)",
+          "content": "System configuration, security decisions, resource allocation, master workflow changes. Only Agent Zero executes."
+        },
+        {
+          "id": "level_2_coordination",
+          "title": "Level 2 - Coordination (Agent Zero + Subagent 2)",
+          "content": "Cross-service coordination, integration tasks, critical API operations. Agent Zero + API Gateway route to others."
+        },
+        {
+          "id": "level_3_workflow",
+          "title": "Level 3 - Workflow (Multiple Subagents)",
+          "content": "Data pipelines, analysis workflows, complex processing. 2-4 subagents work in parallel, Agent Zero orchestrates."
+        },
+        {
+          "id": "level_4_routine",
+          "title": "Level 4 - Routine (Single Subagent)",
+          "content": "Individual service tasks, local processing, routine operations. Direct execution on single subagent."
+        }
+      ]
+    },
+    {
+      "id": "business_workflows",
+      "title": "Business Workflows & Task Examples",
+      "description": "Real-world task assignment scenarios",
+      "lessons": [
+        {
+          "id": "workflow_training_recommendation",
+          "title": "Workflow: Generate Training Recommendations",
+          "content": "Task Chain: Agent Zero → Subagent 1 (get courses) → Subagent 3 (prepare data) → Subagent 5 (ML recommendations) → Subagent 4 (create report) → Return to Agent Zero"
+        },
+        {
+          "id": "workflow_course_analysis",
+          "title": "Workflow: Analyze Course Performance",
+          "content": "Task Chain: Agent Zero → Subagent 1 (metrics) → Subagent 3 (normalize) → Subagent 4 (analysis) → Subagent 5 (predict trends) → Return aggregated results"
+        },
+        {
+          "id": "workflow_deployment",
+          "title": "Workflow: Deploy New Course",
+          "content": "Task Chain: Agent Zero → Subagent 1 (create structure) → Subagent 3 (validate content) → Subagent 4 (quality check) → Subagent 5 (auto-generate descriptions) → Subagent 2 (publish)"
+        },
+        {
+          "id": "workflow_data_pipeline",
+          "title": "Workflow: Full Data Pipeline",
+          "content": "Extract → Subagent 3 (transform) → Subagent 4 (analyze) → Subagent 5 (ML enrichment) → Subagent 1 (store) → Subagent 2 (API publish)"
+        }
+      ]
+    },
+    {
+      "id": "execution_model",
+      "title": "Execution Model & Timing",
+      "description": "How tasks are executed and timing",
+      "lessons": [
+        {
+          "id": "parallel_execution",
+          "title": "Parallel Execution",
+          "content": "Subagents 1, 3, 4, 5 execute simultaneously. Subagent 2 coordinates. Average response: 2-3 seconds for complex workflows."
+        },
+        {
+          "id": "sequential_execution",
+          "title": "Sequential Execution",
+          "content": "When output of one task feeds into another. Example: Subagent 1 → Subagent 3 → Subagent 4. Used for dependent workflows."
+        },
+        {
+          "id": "hybrid_execution",
+          "title": "Hybrid Execution",
+          "content": "Combination of parallel and sequential. Example: 1+3 parallel, then result to 4+5 parallel, then 2 coordinates final output."
+        },
+        {
+          "id": "agent_zero_coordination",
+          "title": "Agent Zero Coordination",
+          "content": "Agent Zero waits for all subagent responses, merges results, handles conflicts, applies business logic, returns final result."
+        }
+      ]
+    },
+    {
+      "id": "assignment_routing",
+      "title": "Task Assignment & Routing Rules",
+      "description": "How tasks get routed to subagents",
+      "lessons": [
+        {
+          "id": "rule_learning_tasks",
+          "title": "Learning/Training Tasks → Subagent 1 (LMS)",
+          "content": "Any task involving courses, training, content management, enrollment. Primary: south-lms:6000"
+        },
+        {
+          "id": "rule_integration_tasks",
+          "title": "Integration/API Tasks → Subagent 2 (API Gateway)",
+          "content": "Cross-service calls, coordination, routing, load balancing. Primary: 161:80"
+        },
+        {
+          "id": "rule_data_processing",
+          "title": "Data Processing Tasks → Subagent 3 (Processor)",
+          "content": "ETL, validation, transformation, cleaning. Primary: unruffled_buck:80"
+        },
+        {
+          "id": "rule_analysis_reporting",
+          "title": "Analysis/Reporting Tasks → Subagent 4 (Analysis)",
+          "content": "Analytics, metrics, dashboards, insights, reports. Primary: ecstatic_mirzakhani:80"
+        },
+        {
+          "id": "rule_ml_predictions",
+          "title": "ML/Predictions → Subagent 5 (ML/AI)",
+          "content": "Machine learning, recommendations, NLP, predictions, pattern detection. Primary: magical_chaplygin:80"
+        }
+      ]
+    },
+    {
+      "id": "performance_optimization",
+      "title": "Performance & Optimization",
+      "description": "Speed up operations and optimize resource usage",
+      "lessons": [
+        {
+          "id": "caching_strategy",
+          "title": "Caching Strategy",
+          "content": "LMS courses: 1-hour cache. Analysis results: 30-minute cache. ML predictions: real-time (no cache). Reduce redundant calls by 60%."
+        },
+        {
+          "id": "load_balancing",
+          "title": "Load Balancing",
+          "content": "Subagent 2 (API) acts as load balancer. Distributes requests across Subagents 1, 3, 4, 5. Prevents bottlenecks."
+        },
+        {
+          "id": "parallel_optimization",
+          "title": "Maximize Parallelization",
+          "content": "Run independent tasks simultaneously. Example: Get courses (Sub 1) + Fetch employee data (Sub 3) at same time. Saves 40-50% execution time."
+        },
+        {
+          "id": "batch_processing",
+          "title": "Batch Processing",
+          "content": "Group similar tasks together. Send 100 recommendations at once instead of 1 at a time. Improves throughput by 8x."
+        }
+      ]
+    },
+    {
+      "id": "n8n_integration",
+      "title": "n8n Orchestration Integration",
+      "description": "How n8n coordinates with Agent Zero and subagents",
+      "lessons": [
+        {
+          "id": "n8n_workflow_dispatch",
+          "title": "n8n Task Dispatcher",
+          "content": "n8n receives tasks, routes to Agent Zero. Agent Zero orchestrates subagents. n8n waits for completion, aggregates, stores results."
+        },
+        {
+          "id": "n8n_webhook_trigger",
+          "title": "n8n Webhook Triggers",
+          "content": "Tasks arrive via webhook: POST /webhook/task-dispatch with task_type, priority, required_subagents, data payload."
+        },
+        {
+          "id": "n8n_result_aggregation",
+          "title": "Result Aggregation in n8n",
+          "content": "n8n merges results from all subagents, applies business logic, formats response, stores in database/cache."
+        },
+        {
+          "id": "n8n_monitoring",
+          "title": "n8n Monitoring & Logging",
+          "content": "Track execution time, error rates, success rates per subagent. Alert if any subagent response time > 5 seconds."
+        }
+      ]
+    },
+    {
+      "id": "error_handling",
+      "title": "Error Handling & Fallback",
+      "description": "How system handles failures",
+      "lessons": [
+        {
+          "id": "subagent_failure",
+          "title": "Subagent Failure Handling",
+          "content": "If Subagent fails: retry 2x, log error, return partial results if others succeeded, alert Agent Zero."
+        },
+        {
+          "id": "timeout_handling",
+          "title": "Timeout Handling",
+          "content": "If subagent doesn't respond in 5s: cancel task, retry with different subagent if available, return cached result if exists."
+        },
+        {
+          "id": "cascading_failure",
+          "title": "Cascading Failure Prevention",
+          "content": "If Subagent 2 (API) fails: other subagents still work directly. If Agent Zero fails: subagents go into safe mode, accept only health checks."
+        },
+        {
+          "id": "recovery_strategy",
+          "title": "Recovery Strategy",
+          "content": "Auto-restart failed subagent. Re-queue failed tasks. Notify admin if repeated failures. Scale up healthy subagents."
+        }
+      ]
+    },
+    {
+      "id": "kpis_metrics",
+      "title": "Key Performance Indicators",
+      "description": "Metrics to measure system health",
+      "lessons": [
+        {
+          "id": "kpi_response_time",
+          "title": "Average Response Time",
+          "content": "Target: 2-3 seconds for complex workflows. Measure: time from task received to final result returned."
+        },
+        {
+          "id": "kpi_throughput",
+          "title": "Throughput",
+          "content": "Target: 100+ tasks/hour. Measure: number of completed tasks per hour across all subagents."
+        },
+        {
+          "id": "kpi_error_rate",
+          "title": "Error Rate",
+          "content": "Target: < 2%. Measure: failed tasks / total tasks. Alert if > 5%."
+        },
+        {
+          "id": "kpi_subagent_health",
+          "title": "Subagent Health Score",
+          "content": "Score 0-100 per subagent. Factors: uptime (40%), response time (30%), error rate (20%), throughput (10%)."
+        }
+      ]
+    }
+  ],
+  "assessments": [
+    {
+      "id": "assessment_hierarchy_understanding",
+      "type": "quiz",
+      "module": "hierarchy_structure",
+      "title": "Organizational Hierarchy Quiz",
+      "passing_score": 80
+    },
+    {
+      "id": "assessment_task_routing",
+      "type": "practical",
+      "module": "assignment_routing",
+      "title": "Task Routing Exercise",
+      "description": "Given business requirements, correctly route to appropriate subagent"
+    },
+    {
+      "id": "assessment_workflow_design",
+      "type": "case_study",
+      "module": "business_workflows",
+      "title": "Design Multi-Subagent Workflow",
+      "description": "Create optimal workflow for complex business scenario"
+    },
+    {
+      "id": "assessment_performance_optimization",
+      "type": "practical",
+      "module": "performance_optimization",
+      "title": "Optimize Workflow Performance",
+      "description": "Identify bottlenecks and apply optimization techniques"
+    }
+  ]
+}
