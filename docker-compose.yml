@@ -1,0 +1,90 @@
+services:
+  # Unified Entry Point (Command Endpoint)
+  entry-point:
+    container_name: agent-zero-entry-point
+    build:
+      context: .
+      dockerfile: Dockerfile.entry
+    ports:
+      - "7777:7777"
+    environment:
+      - PYTHON_URL=http://agent-zero-autonomous:5555
+      - DOCKER_URL=http://agent-zero-prod:80
+      - PRIMARY_MODE=python-autonomous
+      - FALLBACK_ENABLED=true
+    networks:
+      - chat-network
+    restart: unless-stopped
+    labels:
+      - "role=command-entry-point"
+      - "version=v1.3-hybrid"
+    depends_on:
+      - agent-zero-prod
+      - agent-zero-autonomous
+
+  # Agent Zero v1.3 UI (Docker Official)
+  agent-zero-prod:
+    container_name: agent-zero-prod
+    image: agent0ai/agent-zero:v1.3
+    ports:
+      - "55015:80"
+    environment:
+      - LMS_URL=http://south-lms:6000
+      - SERVICE_161=http://161:80
+      - SERVICE_UNRUFFLED=http://unruffled_buck
+      - SERVICE_ECSTATIC=http://ecstatic_mirzakhani
+      - SERVICE_MAGICAL=http://magical_chaplygin
+      - SERVICE_NOSTALGIC=http://nostalgic_bohr:80
+      - CHAT_NETWORK=chat-network
+    networks:
+      - chat-network
+    restart: unless-stopped
+    labels:
+      - "role=docker-ui"
+      - "version=v1.3"
+    depends_on:
+      - south-lms
+
+  # Agent Zero Python Autonomous (Fallback/Primary)
+  agent-zero-autonomous:
+    container_name: agent-zero-autonomous
+    build:
+      context: .
+      dockerfile: Dockerfile.autonomous
+    ports:
+      - "5555:5555"
+    environment:
+      - FLASK_ENV=production
+      - PORT=5555
+    networks:
+      - chat-network
+    restart: unless-stopped
+    labels:
+      - "role=python-autonomous"
+      - "version=custom"
+    depends_on:
+      - south-lms
+
+  # LMS Service
+  south-lms:
+    image: mass161/south-lms:latest
+    container_name: south-lms
+    ports:
+      - "6000:6000"
+    environment:
+      - PORT=6000
+      - FLASK_ENV=production
+    networks:
+      - chat-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  chat-network:
+    driver: bridge
+    name: chat-network
