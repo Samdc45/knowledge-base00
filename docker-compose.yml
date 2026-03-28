@@ -1,17 +1,4 @@
 services:
-  agent-zero:
-    container_name: agent-zero
-    image: agent0ai/agent-zero:v1.3
-    ports:
-      - "55015:80"
-    environment:
-      - OPENROUTER_API_KEY=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
-      - LMS_URL=http://south-lms:6000
-      - CHAT_NETWORK=chat-network
-    networks:
-      - chat-network
-    restart: unless-stopped
-
   south-lms:
     image: mass161/south-lms:latest
     container_name: south-lms
