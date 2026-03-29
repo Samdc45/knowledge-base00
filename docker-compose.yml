@@ -1,4 +1,84 @@
+version: '3.8'
+
 services:
+  # Ollama - Local LLM (FREE, no API key needed)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    networks:
+      - chat-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Agent Zero - Autonomous Task Router (Configured)
+  agent-zero:
+    container_name: agent-zero
+    image: agent0ai/agent-zero:v1.3
+    ports:
+      - "55015:80"
+    environment:
+      # LMS Integration (Background Knowledge)
+      - LMS_URL=http://south-lms:6000
+      - LMS_HEALTH_CHECK=http://south-lms:6000/health
+      - LMS_COURSES_ENDPOINT=http://south-lms:6000/api/courses
+      
+      # Local LLM Configuration (FREE)
+      - LLM_PROVIDER=ollama
+      - OLLAMA_MODEL=mistral
+      - OLLAMA_BASE_URL=http://ollama:11434
+      
+      # Knowledge Base
+      - MEMORY_ENABLED=true
+      - BACKGROUND_KNOWLEDGE=true
+      - KNOWLEDGE_SOURCE=LMS_SERVICE
+      
+      # Network
+      - CHAT_NETWORK=chat-network
+      
+      # Subagents
+      - SUBAGENT_1_LMS=http://south-lms:6000
+      - SUBAGENT_2_API_GATEWAY=http://161:80
+      - SUBAGENT_3_DATA_PROCESSOR=http://unruffled_buck:80
+      - SUBAGENT_4_ANALYSIS=http://ecstatic_mirzakhani:80
+      - SUBAGENT_5_ML_AI=http://magical_chaplygin:80
+      
+      # Performance
+      - MAX_WORKERS=4
+      - REQUEST_TIMEOUT=30
+      - CACHE_ENABLED=true
+      - CACHE_TTL=3600
+      
+      # Logging
+      - LOG_LEVEL=INFO
+      - ENABLE_AUDIT_LOGS=true
+      
+      # Monitoring
+      - HEALTH_CHECK_INTERVAL=30
+      - METRICS_ENABLED=true
+      
+    networks:
+      - chat-network
+    restart: unless-stopped
+    depends_on:
+      - ollama
+      - south-lms
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # LMS Service (Knowledge Base)
   south-lms:
     image: mass161/south-lms:latest
     container_name: south-lms
@@ -20,3 +100,7 @@ networks:
   chat-network:
     driver: bridge
     name: chat-network
+
+volumes:
+  ollama_data:
+    driver: local
