@@ -81,3 +81,15 @@ Full workflow for checking site health, auditing SEO, fixing Nginx, deploying to
 | `multiplatform_seo.py` | Injects Twitter/X, Bing, Yandex, OG, breadcrumb schema signals |
 | `gen_sea_pages.py` | Generates regional pages for Singapore, Malaysia, Philippines |
 | `crawl_analysis.py` | Reads Google Search Console CSV exports and generates charts |
+
+---
+
+## SiteMate Pro Development Review
+
+### `skills/sitemate-pro-development-review.md`
+Knowledge package extracted from the Manus session reviewing the SiteMate codebase and PITCH_DECK_PROFESSIONAL.md. Covers the full tech stack (React/Vite/Tailwind/Base44 SDK), LMS development phases 1-6, AI-powered EDPP course generator architecture, branding decisions (blue + orange), and Base44 publishing status.
+
+**Key URLs from that session:**
+- Dev build: `https://sitematepro-arbd2w84.manus.space`
+- Production target: `https://sitemate.base44.app`
+- Source repo: `Samdc45/sitesafe`
